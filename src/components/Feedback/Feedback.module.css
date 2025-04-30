@@ -1,0 +1,5 @@
+div>div:last-child p {
+    margin: 6px 0;
+    font-size: 16px;
+    color: #222;
+}
