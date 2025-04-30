@@ -22,7 +22,7 @@ const initialFeedback = JSON.parse(localStorage.getItem("feedback")) || {
     setFeedback((prev) => ({ ...prev, [type]: prev[type] + 1 }));
   };
 
-  const handleReset = () => {
+  const updateReset = () => {
     const reset = { good: 0, neutral: 0, bad: 0 };
     setFeedback(reset);
     localStorage.setItem("feedback", JSON.stringify(reset));
@@ -36,7 +36,7 @@ const initialFeedback = JSON.parse(localStorage.getItem("feedback")) || {
       <Description />
       <Options
         onLeaveFeedback={updateFeedback}
-        onReset={handleReset}
+        onReset={updateReset}
         hasFeedback={total > 0}
       />
       {total > 0 ? (
@@ -44,10 +44,7 @@ const initialFeedback = JSON.parse(localStorage.getItem("feedback")) || {
       ) : (
           <Notification message="No feedback yet" />
       )}
-      
     </div>
   );
 };
-
-
 export default App;
