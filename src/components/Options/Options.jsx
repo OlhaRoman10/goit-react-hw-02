@@ -1,11 +1,11 @@
 import './Options.module.css'
-const Options = ({ onLeaveFeedback, onReset }) => {
+const Options = ({ onLeaveFeedback, onReset, hasFeedback }) => {
   return (
     <div>
       <button onClick={() => onLeaveFeedback("good")}>Good</button>
       <button onClick={() => onLeaveFeedback("neutral")}>Neutral</button>
       <button onClick={() => onLeaveFeedback("bad")}>Bad</button>
-      <button onClick={onReset}>Reset</button>
+      {hasFeedback && <button onClick={onReset}>Reset</button>}
     </div>
   );
 };

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-import Description from './components/Description/Description';
-import Options from './components/Options/Options';
-import Feedback from './components/Feedback/Feedback';
+import './App.module.css';
+import Description from '../Description/Description';
+import Options from '../Options/Options';
+import Feedback from '../Feedback/Feedback';
+import Notification from '../Notification/Notification';
 
 const initialFeedback = JSON.parse(localStorage.getItem("feedback")) || {
   good: 0,
@@ -17,7 +18,7 @@ const initialFeedback = JSON.parse(localStorage.getItem("feedback")) || {
     localStorage.setItem("feedback", JSON.stringify(feedback));
   }, [feedback]);
 
-  const handleFeedback = (type) => {
+  const updateFeedback = (type) => {
     setFeedback((prev) => ({ ...prev, [type]: prev[type] + 1 }));
   };
 
@@ -33,8 +34,17 @@ const initialFeedback = JSON.parse(localStorage.getItem("feedback")) || {
   return (
     <div>
       <Description />
-      <Options onLeaveFeedback={handleFeedback} onReset={handleReset} />
-      <Feedback values={feedback} total={total} positive={positive} />
+      <Options
+        onLeaveFeedback={updateFeedback}
+        onReset={handleReset}
+        hasFeedback={total > 0}
+      />
+      {total > 0 ? (
+<Feedback values={feedback} total={total} positive={positive} />
+      ) : (
+          <Notification message="No feedback yet" />
+      )}
+      
     </div>
   );
 };
